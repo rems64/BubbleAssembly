@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=4 uid="uid://idwlm7l7ny2e"]
+
+[ext_resource type="TileSet" uid="uid://b8b7c7jw0qg2m" path="res://factory_belts.tres" id="1_5mq3x"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TileMap" type="Node2D" parent="."]
+
+[node name="Layer0" type="TileMapLayer" parent="TileMap"]
+use_parent_material = true
+tile_map_data = PackedByteArray("AAABAAEAAwAAAAIAAAACAAEAAwAAAAIAAAADAAEAAwAAAAIAAAAEAAEAAwAAAAIAAAAFAAEAAwAAAAIAAAAGAAEAAwAAAAIAAAAHAAEAAwAAAAIAAAAIAAEAAwAAAAIAAAAJAAEAAwAAAAIAAAAKAAEAAwAAAAIAAAALAAEAAwAAAAIAAAAMAAEAAwAAAAIAAAA=")
+tile_set = ExtResource("1_5mq3x")
