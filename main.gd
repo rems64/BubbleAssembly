@@ -8,7 +8,6 @@ func _ready():
 
 func _on_pickable_clicked(object):
 	if held_object == null:
-		print("held object not null")
 		object.pickup()
 		held_object = object
 
@@ -25,6 +24,8 @@ func _process(delta):
 func _on_button_pressed():
 	var bulle = preload("res://bubulle.tscn").instantiate()
 	#var bulle_instance = bulle.instance()
-	#bulle.global_transform = child.global_transform
+	bulle.global_transform = child.global_transform
+	bulle.global_position.x += 5
+	bulle.global_position.y += 5
 	add_child(bulle)
 	bulle.clicked.connect(_on_pickable_clicked)

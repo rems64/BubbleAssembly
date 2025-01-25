@@ -154,9 +154,11 @@ radius = 45.0
 
 [node name="bulle" type="RigidBody2D" groups=["pickable"]]
 position = Vector2(471, 199)
-scale = Vector2(2, 2)
 input_pickable = true
 freeze = true
+freeze_mode = 1
+contact_monitor = true
+max_contacts_reported = 5
 script = ExtResource("1_c328f")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -167,5 +169,7 @@ animation = &"bulle"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_2sphb")
 
+[connection signal="body_entered" from="." to="." method="_on_bulle_collisioned"]
+[connection signal="body_exited" from="." to="." method="_on_bulle_exited"]
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="animation_changed" from="AnimatedSprite2D" to="." method="_on_animation_changed"]

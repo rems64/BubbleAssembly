@@ -1,13 +1,20 @@
 extends RigidBody2D
+
+signal clicked
 @onready var collisionBox = $CollisionShape2D
 @onready var apparence = $AnimatedSprite2D
 
-@onready var contactHaut = false
-@onready var contactBas = false
-@onready var contactDroite = false
-@onready var contactGauche = false
+@onready var voisinHaut = null
+@onready var voisinBas = null
+@onready var voisinGauche = null
+@onready var voisinDroite = null
+#@onready var contactHaut = false
+#@onready var contactBas = false
+#@onready var contactDroite = false
+#@onready var contactGauche = false
 
 @onready var len_bulle = apparence.get_sprite_frames().get_frame_texture("bulle", 0).get_size().x
+@onready var held = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,58 +22,40 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-@onready var i = 0
 func _process(delta):
-	#i += 1
-	#print(held)
-	if (i == 50) : 
-		contactHaut = false
-		contactBas = true
-		contactGauche = true
-		contactDroite = true
-		contact()
-	if (i == 100) : 
-		contactHaut = false
-		contactBas = false
-		contactGauche = false
-		contactDroite = false
-		contact()
-	if (i == 150) : 
-		contactHaut = true
-		contactBas = false
-		contactGauche = true
-		contactDroite = true
-		contact()
-	if (i == 200) : 
-		contactHaut = false
-		contactBas = false
-		contactGauche = false
-		contactDroite = false
-		contact()
-	if (i == 150) : 
-		contactHaut = true
-		contactBas = true
-		contactGauche = true
-		contactDroite = true
-		contact()
-	if (i == 200) : 
-		contactHaut = true
-		contactBas = true
-		contactGauche = true
-		contactDroite = false
-		contact()
-		i = 0
+	pass
 
-signal clicked
-var held = false
 func _on_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton  and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed : 
 			clicked.emit(self)
 
 func _physics_process(delta):
-	if held :
-		global_transform.origin = get_global_mouse_position()
+	#//reinitialize les voisins
+	if voisinHaut != null : _on_bulle_exited(voisinHaut)
+	if voisinBas != null : _on_bulle_exited(voisinBas)
+	if voisinGauche != null : _on_bulle_exited(voisinGauche)
+	if voisinDroite != null : _on_bulle_exited(voisinDroite)
+		#global_transform.origin = round(get_global_mouse_position())
+	
+	#//déplace la bubulle comme on le veut
+	if held : 
+		global_position = round(get_global_mouse_position())
+		#collision = move_and_collide(round(get_global_mouse_position())-global_position)
+	
+	#//recalcule des voisins
+	var collision = get_colliding_bodies()
+	if collision != null :
+		if held :
+			global_position = round(get_global_mouse_position())
+		for bulle in collision :
+			#_on_bulle_collisioned(collision.get_collider())
+			_on_bulle_collisioned(bulle)
+			
+	else :
+		pass
+#	update l'affichage
+	contact()
 
 func pickup():
 	if held:
@@ -78,6 +67,31 @@ func drop(impulse=Vector2.ZERO) :
 	if held :
 		#freeze = false
 		apply_central_impulse(impulse)
+		var collision = get_colliding_bodies()
+		#var collision = move_and_collide(Vector2(0, 0))
+		if collision != null :
+			print(collision)
+			 #handle the rightful placement
+			for bulle in collision :
+				#var bulle = collider
+				var bulle_x = bulle.global_position.x
+				var bulle_y = bulle.global_position.y
+				var me_x = global_position.x
+				var me_y = global_position.y
+				
+				var diff_x = me_x - bulle_x
+				var diff_y = me_y - bulle_y
+				if abs(diff_x) > abs(diff_y) : #si la bulle est plus à ma gauche/droite qu'en haut/bas :
+					global_position.y = bulle.global_position.y
+					if diff_x < 0 : #la bulle est à ma droite
+						global_position.x = bulle.global_position.x - 2*len_bulle-5
+					else : global_position.x = bulle.global_position.x + 2*len_bulle+5
+				else :
+					global_position.x = bulle.global_position.x
+					if diff_y < 0 : #la bulle est en-dessous de moi
+						global_position.y = bulle.global_position.y - 2*len_bulle-5
+					else : global_position.y = bulle.global_position.y + 2*len_bulle+5
+			
 		held = false
 
 
@@ -86,7 +100,11 @@ func _on_animation_changed():
 	var apparence_size = apparence.get_sprite_frames().get_frame_texture(apparence.animation, 0).get_size()
 	#print(new_rect)
 	apparence.offset.x = 0; apparence.offset.y = 0;
+	var contactHaut = voisinHaut != null
+	var contactBas = voisinBas != null
 	if (apparence_size.x < len_bulle) :
+		var contactGauche = voisinGauche != null
+		var contactDroite = voisinDroite != null
 		if contactGauche && contactDroite :
 			apparence.offset.x = -0.5
 			if contactHaut || contactBas :
@@ -108,11 +126,43 @@ func _on_animation_changed():
 		
 func contact() :
 	var anim_name = "coupé"
-	if contactHaut : anim_name += " haut"
-	if contactBas : anim_name += " bas"
-	if contactGauche : anim_name += " gauche"
-	if contactDroite : anim_name += " droite"
+	if voisinHaut!=null : anim_name += " haut"
+	if voisinBas!=null : anim_name += " bas"
+	if voisinGauche!=null : anim_name += " gauche"
+	if voisinDroite!=null : anim_name += " droite"
 	
 	if anim_name == "coupé" : anim_name = "bulle"
-	print(anim_name)
 	apparence.play(anim_name)
+
+
+func _on_bulle_collisioned(bulle: Node):
+	#if held :
+		#bulle._on_bulle_collisioned(self)
+	remove_from_voisin(bulle)
+	var bulle_x = bulle.global_position.x
+	var bulle_y = bulle.global_position.y
+	var me_x = global_position.x
+	var me_y = global_position.y
+	
+	var diff_x = me_x - bulle_x
+	var diff_y = me_y - bulle_y
+	if abs(diff_x) > abs(diff_y) : #si la bulle vient plutôt de gauche/droite que de haut/bas :
+		if diff_x < 0 : #la bulle est à ma droite
+			voisinDroite = bulle
+		else : voisinGauche = bulle
+	else :
+		if diff_y < 0 : #la bulle est en-dessous de moi
+			voisinBas = bulle
+		else : voisinHaut = bulle
+
+
+func _on_bulle_exited(bulle: Node) -> void:
+	#if held :
+		#bulle._on_bulle_exited(self)
+	remove_from_voisin(bulle)
+
+func remove_from_voisin(bulle : Node) :
+	if voisinHaut == bulle : voisinHaut = null
+	elif voisinBas == bulle : voisinBas = null
+	elif voisinGauche == bulle : voisinGauche = null
+	elif voisinDroite == bulle : voisinDroite = null
