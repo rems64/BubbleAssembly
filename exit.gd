@@ -1,6 +1,7 @@
 extends Area2D
 
 @export var is_exit: bool = false
+@export var level: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=4 uid="uid://cd8ornr32tkhw"]
+[gd_scene load_steps=23 format=4 uid="uid://cd8ornr32tkhw"]
 
 [ext_resource type="TileSet" uid="uid://b8b7c7jw0qg2m" path="res://factory_belts.tres" id="1_0rjcl"]
 [ext_resource type="Script" path="res://main.gd" id="1_xra8f"]
+[ext_resource type="Script" path="res://objectif.gd" id="2_3rmrg"]
 [ext_resource type="Texture2D" uid="uid://12n0d04wd02l" path="res://illus/level_objectifs/lv0.png" id="2_3wd65"]
 [ext_resource type="FontFile" uid="uid://dbmqagvqypr2v" path="res://Pixle_Font.ttf" id="2_3x6ar"]
 [ext_resource type="PackedScene" uid="uid://bnxpox1r4ypfm" path="res://bubulle.tscn" id="2_gc5vy"]
@@ -84,6 +85,7 @@ size = Vector2(20, 10)
 script = ExtResource("1_xra8f")
 
 [node name="objectif" type="Node2D" parent="."]
+script = ExtResource("2_3rmrg")
 
 [node name="ColorRect" type="ColorRect" parent="objectif"]
 offset_left = 31.0
@@ -195,7 +197,7 @@ shape = SubResource("RectangleShape2D_agss4")
 [node name="Area2D" parent="." instance=ExtResource("6_ppdk1")]
 position = Vector2(507, 46)
 
-[node name="Area2D2" parent="." instance=ExtResource("6_ppdk1")]
+[node name="FIN" parent="." instance=ExtResource("6_ppdk1")]
 position = Vector2(507, 204)
 is_exit = true
 
