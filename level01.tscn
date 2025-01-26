@@ -85,8 +85,8 @@ size = Vector2(20, 10)
 script = ExtResource("1_xra8f")
 
 [node name="objectif" type="Node2D" parent="."]
-script = ExtResource("2_3rmrg")
 position = Vector2(413, 166)
+script = ExtResource("2_3rmrg")
 
 [node name="ColorRect" type="ColorRect" parent="objectif"]
 offset_left = 12.0
