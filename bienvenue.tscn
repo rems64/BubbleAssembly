@@ -1,0 +1,114 @@
+[gd_scene load_steps=8 format=3 uid="uid://ctl03nd4omgmf"]
+
+[ext_resource type="FontFile" uid="uid://dbmqagvqypr2v" path="res://Pixle_Font.ttf" id="1_e2hye"]
+[ext_resource type="PackedScene" uid="uid://idwlm7l7ny2e" path="res://node_2d.tscn" id="2_0084a"]
+[ext_resource type="PackedScene" uid="uid://dm2ato8fp0vjt" path="res://bubulle.tscn" id="3_38cpk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_38uy5"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+bg_color = Color(0.27, 0.492333, 0.5, 1)
+border_width_left = 1
+border_width_right = 4
+border_width_bottom = 2
+border_color = Color(0.1519, 0.30473, 0.31, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 20
+expand_margin_left = 2.0
+expand_margin_top = 4.0
+expand_margin_right = 2.0
+shadow_size = 2
+shadow_offset = Vector2(1, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3s2ch"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+bg_color = Color(0.32549, 0.592157, 0.6, 1)
+border_width_left = 1
+border_width_right = 4
+border_width_bottom = 2
+border_color = Color(0.201562, 0.400992, 0.406942, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 20
+expand_margin_left = 2.0
+expand_margin_top = 4.0
+expand_margin_right = 2.0
+shadow_size = 2
+shadow_offset = Vector2(1, 1)
+anti_aliasing = false
+
+[sub_resource type="Theme" id="Theme_3krrx"]
+default_base_scale = 0.5
+default_font = ExtResource("1_e2hye")
+default_font_size = 20
+Button/colors/font_outline_color = Color(0.0486, 0.08862, 0.09, 1)
+Button/colors/icon_normal_color = Color(0.0958448, 0.217461, 0.221105, 1)
+Button/fonts/font = ExtResource("1_e2hye")
+Button/icons/icon = null
+Button/styles/focus = null
+Button/styles/hover = SubResource("StyleBoxFlat_38uy5")
+Button/styles/normal = SubResource("StyleBoxFlat_3s2ch")
+Button/styles/pressed = SubResource("StyleBoxFlat_38uy5")
+
+[sub_resource type="Curve2D" id="Curve2D_3if7o"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -5.00002, 50.0001, 0, 0, 0, 0, 623.866, 50.0906, 0, 0, 0, 0, 1030, 50.0001, 0, 0, 0, 0, 1065, 5, 0, 0, 0, 0, 1070, -405, 0, 0, 0, 0, 1110, -435, 0, 0, 0, 0, 1345, -435, 0, 0, 0, 0, 1380, -395, 0, 0, 0, 0, 1395, -285, 0, 0, 0, 0, 1435, -275, 0, 0, 0, 0, 2000, -270, 0, 0, 0, 0, 2030, -230, 0, 0, 0, 0, 2010, 25.0001, 0, 0, 0, 0, 1990, 55.0001, 0, 0, 0, 0, 1745, 50.0001, 0, 0, 0, 0, 1715, 75.0001, 0, 0, 0, 0, 1715.17, 198.415, 0, 0, 0, 0, 2605, 210)
+}
+point_count = 18
+
+[node name="bienvenue" type="Node2D"]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+texture_filter = 1
+offset_left = 83.0
+offset_top = 18.0
+offset_right = 1207.0
+offset_bottom = 177.0
+scale = Vector2(0.276267, 0.324088)
+pivot_offset = Vector2(38, 36)
+mouse_force_pass_scroll_events = false
+theme_override_fonts/normal_font = ExtResource("1_e2hye")
+theme_override_font_sizes/normal_font_size = 160
+bbcode_enabled = true
+text = "Bubble Assembly"
+scroll_active = false
+autowrap_mode = 2
+drag_and_drop_selection_enabled = false
+
+[node name="Button" type="Button" parent="."]
+offset_left = 250.0
+offset_top = 160.0
+offset_right = 309.0
+offset_bottom = 182.0
+scale = Vector2(1.23982, 1.20429)
+theme = SubResource("Theme_3krrx")
+text = "START"
+
+[node name="Node2D" parent="." instance=ExtResource("2_0084a")]
+position = Vector2(0, 152)
+
+[node name="bulle" parent="." instance=ExtResource("3_38cpk")]
+position = Vector2(-5, 187)
+scale = Vector2(0.2, 0.2)
+
+[node name="Path2D" type="Path2D" parent="bulle"]
+scale = Vector2(1, 1)
+curve = SubResource("Curve2D_3if7o")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="bulle/Path2D"]
+position = Vector2(-5.00002, 50.0001)
+rotation = 0.000143934
+scale = Vector2(1, 1)
