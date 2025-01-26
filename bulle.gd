@@ -55,7 +55,7 @@ func _physics_process(delta):
 	
 		#//déplace la bubulle comme on le veut
 		if held : 
-			global_position = round(get_global_mouse_position())
+			global_position = round(get_global_mouse_position() + offset)
 			#collision = move_and_collide(round(get_global_mouse_position())-global_position)
 		
 		#//recalcule des voisins
@@ -76,7 +76,7 @@ func _physics_process(delta):
 		
 		if held : 
 			var ancienne_pos = global_position
-			global_position = round(get_global_mouse_position())
+			global_position = round(get_global_mouse_position() + offset)
 			var block = get_parent().dijkstra(self)
 			for voisin in block :
 				voisin.suis_mouvement(global_position-ancienne_pos)
@@ -90,11 +90,14 @@ func voisin_colle() :
 	if !held :
 		collee = true
 
+var offset: Vector2
+
 func pickup():
 	if held:
 		return
 	freeze = true
 	held = true
+	offset = global_position - get_global_mouse_position()
 	
 func drop(impulse=Vector2.ZERO) :
 	if held :
@@ -127,13 +130,13 @@ func drop(impulse=Vector2.ZERO) :
 			if abs(diff_x) > abs(diff_y) : #si la bulle est plus à ma gauche/droite qu'en haut/bas :
 				global_position.y = bulle_y
 				if diff_x < 0 : #la bulle est à ma droite
-					global_position.x = bulle_x - 2*len_bulle-5
-				else : global_position.x = bulle_x + 2*len_bulle+5
+					global_position.x = bulle_x - 0.5*len_bulle-7
+				else : global_position.x = bulle_x + 0.5*len_bulle+6
 			else :
 				global_position.x = bulle_x
 				if diff_y < 0 : #la bulle est en-dessous de moi
-					global_position.y = bulle_y - 2*len_bulle-5
-				else : global_position.y = bulle_y + 2*len_bulle+5
+					global_position.y = bulle_y - 0.5*len_bulle-7
+				else : global_position.y = bulle_y + 0.5*len_bulle+7
 			print("je suis collée : ", get_instance_id())
 			collee = true
 			
@@ -164,9 +167,7 @@ func _on_animation_changed():
 			apparence.offset.y -= (len_bulle - apparence_size.y)/2
 		else :
 			apparence.offset.y += (len_bulle - apparence_size.y)/2
-		
-			
-		
+	
 func contact() :
 	var anim_name = "coupé"
 	if voisinHaut!=null : anim_name += " haut"
