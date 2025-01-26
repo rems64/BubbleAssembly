@@ -17,18 +17,20 @@ signal clicked
 @onready var held = false
 @onready var collee = false
 
+var currently_processed: bool = false
+
 var pathFollower: PathFollow2D
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	global_position.x = get_parent().global_position.x + 2*len_bulle
-	global_position.y = get_parent().global_position.y + 3*len_bulle
+#func _ready():
+	#global_position.x = get_parent().global_position.x + 2*len_bulle
+	#global_position.y = get_parent().global_position.y + 3*len_bulle
 	#modulate = Color(191, 222, 255)
 	#modulate = Color(1, 1, 1, 255)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+#func _process(delta):
+	#pass
 
 func _on_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton  and event.button_index == MOUSE_BUTTON_LEFT:
@@ -83,6 +85,7 @@ func _physics_process(delta):
 
 func suis_mouvement(dp) :
 	global_position += dp
+
 func voisin_colle() :
 	if !held :
 		collee = true
@@ -96,7 +99,7 @@ func pickup():
 func drop(impulse=Vector2.ZERO) :
 	if held :
 		#freeze = false
-		apply_central_impulse(impulse)
+		#apply_central_impulse(impulse)
 		var collision = get_colliding_bodies()
 		if !collee && collision != [] :
 			 #handle the rightful placement
@@ -135,8 +138,6 @@ func drop(impulse=Vector2.ZERO) :
 			collee = true
 			
 		held = false
-
-
 
 func _on_animation_changed():
 	var apparence_size = apparence.get_sprite_frames().get_frame_texture(apparence.animation, 0).get_size()
