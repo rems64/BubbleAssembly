@@ -123,6 +123,8 @@ func drop(impulse=Vector2.ZERO) :
 					proche_bulle = bulle
 				
 			#place l'objet en fonction de la bulle voisine la plus proche
+			print("je vais me placer")
+			print("len bulle : ", len_bulle)
 			var bulle_x = proche_bulle.global_position.x
 			var bulle_y = proche_bulle.global_position.y
 			var diff_x = me_x - bulle_x
