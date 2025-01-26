@@ -8,5 +8,9 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+@onready var level = -1
 func _process(delta: float) -> void:
-	$AnimatedSprite2D.animation = "lv" + fin.level
+	var level_actuel = $FIN.level
+	if level != level_actuel :
+		level = level_actuel
+		$AnimatedSprite2D.apparence.play("lv"+level)
