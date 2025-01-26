@@ -15,6 +15,7 @@ signal clicked
 
 @onready var len_bulle = apparence.get_sprite_frames().get_frame_texture("bulle", 0).get_size().x
 @onready var held = false
+@onready var collee = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -30,35 +31,60 @@ func _process(delta):
 
 func _on_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton  and event.button_index == MOUSE_BUTTON_LEFT:
-		if event.pressed : 
+		if event.pressed: 
 			clicked.emit(self)
+	if event is InputEventMouseButton  and event.button_index == MOUSE_BUTTON_RIGHT:
+		if event.pressed: 
+			if voisinHaut != null : _on_bulle_exited(voisinHaut)
+			if voisinBas != null : _on_bulle_exited(voisinBas)
+			if voisinGauche != null : _on_bulle_exited(voisinGauche)
+			if voisinDroite != null : _on_bulle_exited(voisinDroite)
+			queue_free()
 
 func _physics_process(delta):
-	#//reinitialize les voisins
-	if voisinHaut != null : _on_bulle_exited(voisinHaut)
-	if voisinBas != null : _on_bulle_exited(voisinBas)
-	if voisinGauche != null : _on_bulle_exited(voisinGauche)
-	if voisinDroite != null : _on_bulle_exited(voisinDroite)
+	#//reinitialize les voisins seulement si ce n'est pas fixé encore
+	if !collee :
+		if voisinHaut != null : _on_bulle_exited(voisinHaut)
+		if voisinBas != null : _on_bulle_exited(voisinBas)
+		if voisinGauche != null : _on_bulle_exited(voisinGauche)
+		if voisinDroite != null : _on_bulle_exited(voisinDroite)
 		#global_transform.origin = round(get_global_mouse_position())
 	
-	#//déplace la bubulle comme on le veut
-	if held : 
-		global_position = round(get_global_mouse_position())
-		#collision = move_and_collide(round(get_global_mouse_position())-global_position)
-	
-	#//recalcule des voisins
-	var collision = get_colliding_bodies()
-	if collision != [] :
-		if held :
+		#//déplace la bubulle comme on le veut
+		if held : 
 			global_position = round(get_global_mouse_position())
-		for bulle in collision :
-			#_on_bulle_collisioned(collision.get_collider())
-			_on_bulle_collisioned(bulle)
-			
+			#collision = move_and_collide(round(get_global_mouse_position())-global_position)
+		
+		#//recalcule des voisins
+		var collision = get_colliding_bodies()
+		if collision != [] :
+			if held :
+				global_position = round(get_global_mouse_position())
+			for bulle in collision :
+				#_on_bulle_collisioned(collision.get_collider())
+				_on_bulle_collisioned(bulle)
+		
 	else :
-		pass
+		var collision = get_colliding_bodies()
+		if collision != [] :
+			for bulle in collision :
+				bulle.voisin_colle()
+				_on_bulle_collisioned(bulle)
+		
+		if held : 
+			var ancienne_pos = global_position
+			global_position = round(get_global_mouse_position())
+			var block = get_parent().dijkstra(self)
+			for voisin in block :
+				voisin.suis_mouvement(global_position-ancienne_pos)
 #	update l'affichage
 	contact()
+
+func suis_mouvement(dp) :
+	global_position += dp
+func voisin_colle() :
+	if !held :
+		collee = true
 
 func pickup():
 	if held:
@@ -71,8 +97,7 @@ func drop(impulse=Vector2.ZERO) :
 		#freeze = false
 		apply_central_impulse(impulse)
 		var collision = get_colliding_bodies()
-		if collision != [] :
-			print(collision)
+		if !collee && collision != [] :
 			 #handle the rightful placement
 			var me_x = global_position.x
 			var me_y = global_position.y
@@ -105,6 +130,8 @@ func drop(impulse=Vector2.ZERO) :
 				if diff_y < 0 : #la bulle est en-dessous de moi
 					global_position.y = bulle_y - 2*len_bulle-5
 				else : global_position.y = bulle_y + 2*len_bulle+5
+			print("je suis collée : ", get_instance_id())
+			collee = true
 			
 		held = false
 
@@ -168,15 +195,20 @@ func _on_bulle_collisioned(bulle: Node):
 		if diff_y < 0 : #la bulle est en-dessous de moi
 			voisinBas = bulle
 		else : voisinHaut = bulle
+	
 
 
 func _on_bulle_exited(bulle: Node) -> void:
-	#if held :
-		#bulle._on_bulle_exited(self)
+	if held :
+		bulle._on_bulle_exited(self)
 	remove_from_voisin(bulle)
+	if voisinHaut == null && voisinBas == null && voisinGauche == null && voisinDroite == null :
+		collee = false
 
 func remove_from_voisin(bulle : Node) :
 	if voisinHaut == bulle : voisinHaut = null
 	elif voisinBas == bulle : voisinBas = null
 	elif voisinGauche == bulle : voisinGauche = null
 	elif voisinDroite == bulle : voisinDroite = null
+	
+	
