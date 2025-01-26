@@ -18,7 +18,7 @@ func _unhandled_input(event) :
 			held_object.drop(Input.get_last_mouse_velocity())
 			held_object = null
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 

@@ -1,4 +1,5 @@
 extends RigidBody2D
+
 @onready var collisionBox = $CollisionShape2D
 @onready var apparence = $AnimatedSprite2D
 
@@ -9,10 +10,11 @@ extends RigidBody2D
 
 @onready var len_bulle = apparence.get_sprite_frames().get_frame_texture("bulle", 0).get_size().x
 
+var pathFollower: PathFollow2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	pathFollower = PathFollow2D.new()
+	get_tree().get_current_scene().add_child.call_deferred(pathFollower)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 @onready var i = 0
@@ -59,14 +61,19 @@ func _process(delta):
 
 signal clicked
 var held = false
-func _on_input_event(viewport, event, shape_idx):
-	if event is InputEventMouseButton  and event.button_index == MOUSE_BUTTON_LEFT:
+var drag_offset = Vector2.ZERO
+
+func _on_input_event(_viewport, event, _shape_idx):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed : 
 			clicked.emit(self)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if held :
-		global_transform.origin = get_global_mouse_position()
+		#global_transform.origin = round(get_global_mouse_position())
+		#move_and_collide(round(get_global_mouse_position() - global_position + drag_offset))
+		#move_and_collide(get_global_mouse_position() - global_position)
+		position = round(get_global_mouse_position())
 
 func pickup():
 	if held:
@@ -74,13 +81,12 @@ func pickup():
 	freeze = true
 	held = true
 	
-func drop(impulse=Vector2.ZERO) :
-	if held :
-		#freeze = false
-		apply_central_impulse(impulse)
-		held = false
-
-
+	drag_offset = global_position - get_global_mouse_position()
+	
+func drop(_impulse=Vector2.ZERO) :
+	# apply_central_impulse(impulse)
+	held = false
+	freeze = false
 
 func _on_animation_changed():
 	var apparence_size = apparence.get_sprite_frames().get_frame_texture(apparence.animation, 0).get_size()
@@ -116,3 +122,12 @@ func contact() :
 	if anim_name == "coupé" : anim_name = "bulle"
 	print(anim_name)
 	apparence.play(anim_name)
+
+var belt_triggers: Array[Area2D] = []
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	belt_triggers.push_back(area)
+	print("push body")
+
+func _on_area_2d_area_exited(area: Area2D) -> void:
+	belt_triggers.erase(area)
