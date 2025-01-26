@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://cd8ornr32tkhw"]
+[gd_scene load_steps=25 format=4 uid="uid://cd8ornr32tkhw"]
 
 [ext_resource type="TileSet" uid="uid://b8b7c7jw0qg2m" path="res://factory_belts.tres" id="1_0rjcl"]
 [ext_resource type="Script" path="res://main.gd" id="1_xra8f"]
@@ -6,11 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://12n0d04wd02l" path="res://illus/level_objectifs/lv0.png" id="2_3wd65"]
 [ext_resource type="FontFile" uid="uid://dbmqagvqypr2v" path="res://Pixle_Font.ttf" id="2_3x6ar"]
 [ext_resource type="PackedScene" uid="uid://bnxpox1r4ypfm" path="res://bubulle.tscn" id="2_gc5vy"]
+[ext_resource type="AudioStream" uid="uid://qf8rk05h1qhg" path="res://musique.mp3" id="2_vca1t"]
 [ext_resource type="Texture2D" uid="uid://bakfbds3klh1t" path="res://illus/level_objectifs/lv1.png" id="3_k8yba"]
 [ext_resource type="Texture2D" uid="uid://i11malh6w03d" path="res://illus/level_objectifs/lv2.png" id="4_c7apq"]
-[ext_resource type="PackedScene" uid="uid://cvj0pylkkabra" path="res://conveyor.tscn" id="4_ir3kw"]
+[ext_resource type="PackedScene" path="res://conveyor.tscn" id="4_ir3kw"]
 [ext_resource type="PackedScene" uid="uid://brc6qlway2mx5" path="res://color_changer.tscn" id="5_si668"]
-[ext_resource type="PackedScene" uid="uid://cd4m8jq5cocs2" path="res://exit.tscn" id="6_ppdk1"]
+[ext_resource type="PackedScene" path="res://exit.tscn" id="6_ppdk1"]
 [ext_resource type="Script" path="res://spawn_point.gd" id="12_smqhh"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_j02ya"]
@@ -85,6 +86,11 @@ size = Vector2(20, 10)
 [node name="SceneRoot" type="Node2D"]
 script = ExtResource("1_xra8f")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_vca1t")
+autoplay = true
+parameters/looping = true
+
 [node name="objectif" type="Node2D" parent="."]
 position = Vector2(413, 166)
 script = ExtResource("2_3rmrg")
@@ -123,7 +129,7 @@ text = "Left click : seize bubble
 Right click : pop bubble"
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAPAAYAAQAAABkAAAAOAAYAAQAAAAEAAAANAAYAAQAAAAEAAAAMAAYAAQAAAAEAAAALAAYAAQAAAAEAAAAKAAYAAQAAAAEAAAAJAAYAAQAAABYAAAAIAAYAAQAAABUAAAAHAAYAAQAAABQAAAAGAAYAAQAAAAEAAAABAAEAAQAAAAEAAAACAAEAAQAAAAEAAAADAAEAAQAAAAEAAAAEAAEAAQAAAAEAAAAFAAEAAQAAAAEAAAAGAAEAAQAAAAEAAAAHAAEAAQAAABQAAAAIAAEAAQAAABUAAAAJAAEAAQAAABYAAAAKAAEAAQAAAAEAAAAPAAEAAQAAABcAAAALAAEAAQAAAAEAAAAMAAEAAQAAAAEAAAANAAEAAQAAAAEAAAAOAAEAAQAAAAEAAAAFAAYAAQAAAAgAAAAFAAUAAQAAAAQAAAAFAAQAAQAAAAYAAAAEAAQAAQAAABYAAAADAAQAAQAAABUAAAACAAQAAQAAABQAAAABAAQAAQAAAAgAAAABAAMAAQAAAAkAAAACAAMAAQAAAAIAAAADAAMAAQAAAAIAAAAEAAMAAQAAAAIAAAAFAAMAAQAAAAIAAAAGAAMAAQAAAAIAAAAHAAMAAQAAAAIAAAAIAAMAAQAAABIAAAAAAAEAAQAAAAEAAAD//wEAAQAAAAEAAAA=")
+tile_map_data = PackedByteArray("AAAPAAYAAQAAABkAAAAOAAYAAQAAAAEAAAANAAYAAQAAAAEAAAAMAAYAAQAAAAEAAAALAAYAAQAAAAEAAAAKAAYAAQAAAAEAAAAJAAYAAQAAABYAAAAIAAYAAQAAABUAAAAHAAYAAQAAABQAAAAGAAYAAQAAAAEAAAABAAEAAQAAAAEAAAACAAEAAQAAAAEAAAADAAEAAQAAAAEAAAAEAAEAAQAAAAEAAAAFAAEAAQAAAAEAAAAGAAEAAQAAAAEAAAAHAAEAAQAAABQAAAAIAAEAAQAAABUAAAAJAAEAAQAAABYAAAAKAAEAAQAAAAEAAAAPAAEAAQAAABcAAAALAAEAAQAAAAEAAAAMAAEAAQAAAAEAAAANAAEAAQAAAAEAAAAOAAEAAQAAAAEAAAAFAAYAAQAAAAgAAAAFAAUAAQAAAAQAAAAFAAQAAQAAAAYAAAAEAAQAAQAAABYAAAADAAQAAQAAABUAAAACAAQAAQAAABQAAAABAAQAAQAAAAgAAAABAAMAAQAAAAkAAAACAAMAAQAAAAIAAAADAAMAAQAAAAIAAAAEAAMAAQAAAAIAAAAFAAMAAQAAAAIAAAAGAAMAAQAAAAIAAAAHAAMAAQAAAAIAAAAIAAMAAQAAABIAAAAAAAEAAQAAAAEAAAD//wEAAQAAAAEAAAAAAAQAAQAAAAEAAAD//wQAAQAAAA8AAAA=")
 tile_set = ExtResource("1_0rjcl")
 
 [node name="ColorChanger" parent="." instance=ExtResource("5_si668")]
