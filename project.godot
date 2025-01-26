@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="BubbleAssembly"
-run/main_scene="res://node_2d.tscn"
+run/main_scene="res://level01.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [display]
 
 window/size/viewport_width=512
-window/size/viewport_height=246
+window/size/viewport_height=256
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 
@@ -27,3 +27,4 @@ window/stretch/scale_mode="integer"
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+2d/snap/snap_2d_transforms_to_pixel=true

@@ -17,6 +17,7 @@ signal clicked
 @onready var held = false
 @onready var collee = false
 
+var pathFollower: PathFollow2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	global_position.x = get_parent().global_position.x + 2*len_bulle

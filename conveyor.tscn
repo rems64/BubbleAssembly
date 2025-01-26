@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvj0pylkkabra"]
+
+[ext_resource type="Script" path="res://conveyor.gd" id="1_c4dtm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gqaty"]
+resource_local_to_scene = true
+size = Vector2(11.7671, 14.625)
+
+[node name="Conveyor" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+input_pickable = false
+script = ExtResource("1_c4dtm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gqaty")
