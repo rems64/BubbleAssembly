@@ -20,6 +20,9 @@ func _process(delta: float) -> void:
 	#print(processing_bubbles.size())
 	for bubble in processing_bubbles:
 		if bubble[1] < 0:
+			if bubble[0] == null:
+				processing_bubbles.erase(bubble)
+				continue
 			bubble[0].reparent(get_tree().get_current_scene())
 			var bub = bubble[0].get_child(0);
 			if (bub.modulate == Color.BLACK):
