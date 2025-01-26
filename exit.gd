@@ -1,7 +1,7 @@
 extends Area2D
 
 @export var is_exit: bool = false
-@export var level: int = 0
+@export var level = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,7 +13,9 @@ func _process(delta: float) -> void:
 	pass
 	
 func check_0(body, blocks) -> bool:
-	return body.modulate == Color.RED
+	print(body.get_child(0).modulate)
+	print(Color.YELLOW)
+	return body.get_child(0).modulate == Color.YELLOW
 
 func next_level():
 	print("next level!")
@@ -24,10 +26,15 @@ func _on_body_entered(body: Node2D) -> void:
 		if body.held || body.in_held_block:
 			return
 		
+		print("output")
+		
 		var assembly = body.get_parent().dijkstra(body)
 		if is_exit:
-			if level==0:
+			print("exit")
+			if level == 0:
+				print("level0")
 				if (check_0(body, assembly)):
+					print("check0")
 					next_level()
 
 		body.queue_free()

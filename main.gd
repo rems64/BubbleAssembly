@@ -31,6 +31,8 @@ func _on_button_pressed():
 	bulle.global_position.y += 50
 	bulle.clicked.connect(_on_pickable_clicked)
 
+
+
 func dijkstra(bulleDep : Node) :
 	var liste_voisins = [bulleDep]
 	if bulleDep.voisinHaut != null : liste_voisins.append(bulleDep.voisinHaut)
@@ -61,3 +63,8 @@ func dijkstra(bulleDep : Node) :
 		voisins_visites.append(voisin)
 	liste_voisins.pop_front()
 	return liste_voisins
+
+
+func _on_spawn_point_spawn_bubble() -> void:
+	for node in get_tree().get_nodes_in_group("pickable"):
+		node.clicked.connect(_on_pickable_clicked)
