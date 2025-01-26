@@ -25,10 +25,10 @@ func _on_button_pressed():
 	var bulle = preload("res://bubulle.tscn").instantiate()
 	#var bulle_instance = bulle.instance()
 	#bulle.global_transform = child.global_transform
-	bulle.global_position.x += 5
-	bulle.global_position.y += 5
 	bulle.visible = true
 	add_child(bulle)
+	bulle.global_position.x += 50
+	bulle.global_position.y += 50
 	bulle.clicked.connect(_on_pickable_clicked)
 
 func dijkstra(bulleDep : Node) :

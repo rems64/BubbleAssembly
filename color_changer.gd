@@ -30,8 +30,8 @@ func _process(delta: float) -> void:
 				bub.modulate = Color(min(bub.modulate.r+color.r, 1), min(bub.modulate.g+color.g, 1), min(bub.modulate.b+color.b, 1))
 				if (bub.modulate == Color.WHITE):
 					bub.modulate = Color.BLACK
-			bubble[0].move_and_collide(area_out.global_position - bubble[0].global_position);
 			bubble[0].show();
+			bubble[0].currently_processed = false
 			processing_bubbles.erase(bubble)
 			progress_bar.value = 0.
 		else:
@@ -40,11 +40,16 @@ func _process(delta: float) -> void:
 
 func _on_area_in_body_entered(body: Node2D) -> void:
 	if (body is RigidBody2D):
+		if body.held || body.currently_processed:
+			return
 		for bubble in processing_bubbles:
 			if bubble[0]==body:
 				return
 		print("add")
 		var duration = randf_range(process_duration-process_duration_random, process_duration+process_duration_random)
 		processing_bubbles.push_back([body, duration, duration])
-		body.reparent(self)
+		#body.reparent(self)
+		body.move_and_collide(area_out.global_position - body.global_position)
+		body.freeze = true;
 		body.hide()
+		body.currently_processed = true
