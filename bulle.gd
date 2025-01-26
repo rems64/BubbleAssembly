@@ -120,6 +120,8 @@ func drop(impulse=Vector2.ZERO) :
 					proche_bulle = bulle
 				
 			#place l'objet en fonction de la bulle voisine la plus proche
+			print("je vais me placer")
+			print("len bulle : ", len_bulle)
 			var bulle_x = proche_bulle.global_position.x
 			var bulle_y = proche_bulle.global_position.y
 			var diff_x = me_x - bulle_x
@@ -127,14 +129,14 @@ func drop(impulse=Vector2.ZERO) :
 			if abs(diff_x) > abs(diff_y) : #si la bulle est plus à ma gauche/droite qu'en haut/bas :
 				global_position.y = bulle_y
 				if diff_x < 0 : #la bulle est à ma droite
-					global_position.x = bulle_x - 2*len_bulle-5
-				else : global_position.x = bulle_x + 2*len_bulle+5
+					global_position.x = bulle_x - 0.5*len_bulle - 7#-1
+				else : global_position.x = bulle_x + 0.5*len_bulle +6 #+1
 			else :
 				global_position.x = bulle_x
 				if diff_y < 0 : #la bulle est en-dessous de moi
-					global_position.y = bulle_y - 2*len_bulle-5
-				else : global_position.y = bulle_y + 2*len_bulle+5
-			print("je suis collée : ", get_instance_id())
+					global_position.y = bulle_y - 0.5*len_bulle -7#-1
+				else : global_position.y = bulle_y + 0.5*len_bulle +7#+1
+			print("je suis placée")
 			collee = true
 			
 		held = false

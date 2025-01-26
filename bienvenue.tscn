@@ -2,7 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://dbmqagvqypr2v" path="res://Pixle_Font.ttf" id="1_e2hye"]
 [ext_resource type="PackedScene" uid="uid://idwlm7l7ny2e" path="res://node_2d.tscn" id="2_0084a"]
-[ext_resource type="PackedScene" uid="uid://dm2ato8fp0vjt" path="res://bubulle.tscn" id="3_38cpk"]
+[ext_resource type="PackedScene" uid="uid://bnxpox1r4ypfm" path="res://bubulle.tscn" id="3_38cpk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_38uy5"]
 content_margin_left = 1.0
@@ -65,9 +65,9 @@ Button/styles/pressed = SubResource("StyleBoxFlat_38uy5")
 
 [sub_resource type="Curve2D" id="Curve2D_3if7o"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -5.00002, 50.0001, 0, 0, 0, 0, 623.866, 50.0906, 0, 0, 0, 0, 1030, 50.0001, 0, 0, 0, 0, 1065, 5, 0, 0, 0, 0, 1070, -405, 0, 0, 0, 0, 1110, -435, 0, 0, 0, 0, 1345, -435, 0, 0, 0, 0, 1380, -395, 0, 0, 0, 0, 1395, -285, 0, 0, 0, 0, 1435, -275, 0, 0, 0, 0, 2000, -270, 0, 0, 0, 0, 2030, -230, 0, 0, 0, 0, 2010, 25.0001, 0, 0, 0, 0, 1990, 55.0001, 0, 0, 0, 0, 1745, 50.0001, 0, 0, 0, 0, 1715, 75.0001, 0, 0, 0, 0, 1715.17, 198.415, 0, 0, 0, 0, 2605, 210)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 18, 0, 0, 0, 0, 412, 18, 0, 0, 0, 0, 426, 4, 0, 0, 0, 0, 426, -160, 0, 0, 0, 0, 436, -172, 0, 0, 0, 0, 538, -172, 0, 0, 0, 0, 550, -164, 0, 0, 0, 0, 556, -120, 0, 0, 0, 0, 576, -108, 0, 0, 0, 0, 802, -108, 0, 0, 0, 0, 810, -94, 0, 0, 0, 0, 808, 8, 0, 0, 0, 0, 796, 20, 0, 0, 0, 0, 694, 18, 0, 0, 0, 0, 682, 30, 0, 0, 0, 0, 686, 74, 0, 0, 0, 0, 706, 84, 0, 0, 0, 0, 1024, 84, 0, 0, 0, 0, 1065, 5, 0, 0, 0, 0, 1070, -405, 0, 0, 0, 0, 1110, -435, 0, 0, 0, 0, 1345, -435, 0, 0, 0, 0, 1380, -395, 0, 0, 0, 0, 1395, -285, 0, 0, 0, 0, 1435, -275, 0, 0, 0, 0, 2000, -270, 0, 0, 0, 0, 2030, -230, 0, 0, 0, 0, 2010, 25.0001, 0, 0, 0, 0, 1990, 55.0001, 0, 0, 0, 0, 1745, 50.0001, 0, 0, 0, 0, 1715, 75.0001, 0, 0, 0, 0, 1715.17, 198.415, 0, 0, 0, 0, 2326, 36)
 }
-point_count = 18
+point_count = 33
 
 [node name="bienvenue" type="Node2D"]
 
@@ -102,13 +102,10 @@ position = Vector2(0, 152)
 
 [node name="bulle" parent="." instance=ExtResource("3_38cpk")]
 position = Vector2(-5, 187)
-scale = Vector2(0.2, 0.2)
+scale = Vector2(0.5, 0.5)
 
 [node name="Path2D" type="Path2D" parent="bulle"]
-scale = Vector2(1, 1)
 curve = SubResource("Curve2D_3if7o")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="bulle/Path2D"]
-position = Vector2(-5.00002, 50.0001)
-rotation = 0.000143934
-scale = Vector2(1, 1)
+position = Vector2(0, 18)
