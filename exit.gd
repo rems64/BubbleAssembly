@@ -30,7 +30,9 @@ func check_1(body, blocks) -> bool:
 
 func check_2(body, blocks) -> bool:
 	if body.get_child(0).modulate != Color(1, 0, 1): return false
+	if body.voisinGauche == null: return false
 	if body.voisinGauche.get_child(0).modulate != Color.BLUE: return false
+	if body.voisinGauche.voisinHaut == null: return false
 	if body.voisinGauche.voisinHaut.get_child(0).modulate != Color.RED: return false
 	return true
 
