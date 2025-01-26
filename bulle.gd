@@ -15,6 +15,7 @@ signal clicked
 
 @onready var len_bulle = apparence.get_sprite_frames().get_frame_texture("bulle", 0).get_size().x
 @onready var held = false
+@onready var in_held_block = false
 @onready var collee = false
 
 var currently_processed: bool = false
@@ -75,6 +76,7 @@ func _physics_process(delta):
 				_on_bulle_collisioned(bulle)
 		
 		if held : 
+			in_held_block = true
 			var ancienne_pos = global_position
 			global_position = round(get_global_mouse_position() + offset)
 			var block = get_parent().dijkstra(self)
@@ -84,6 +86,7 @@ func _physics_process(delta):
 	contact()
 
 func suis_mouvement(dp) :
+	in_held_block = true
 	global_position += dp
 
 func voisin_colle() :
@@ -103,6 +106,7 @@ func drop(impulse=Vector2.ZERO) :
 	if held :
 		#freeze = false
 		#apply_central_impulse(impulse)
+		
 		var collision = get_colliding_bodies()
 		if !collee && collision != [] :
 			 #handle the rightful placement
@@ -123,8 +127,6 @@ func drop(impulse=Vector2.ZERO) :
 					proche_bulle = bulle
 				
 			#place l'objet en fonction de la bulle voisine la plus proche
-			print("je vais me placer")
-			print("len bulle : ", len_bulle)
 			var bulle_x = proche_bulle.global_position.x
 			var bulle_y = proche_bulle.global_position.y
 			var diff_x = me_x - bulle_x
@@ -139,9 +141,12 @@ func drop(impulse=Vector2.ZERO) :
 				if diff_y < 0 : #la bulle est en-dessous de moi
 					global_position.y = bulle_y - 0.5*len_bulle-7
 				else : global_position.y = bulle_y + 0.5*len_bulle+7
-			print("je suis collée : ", get_instance_id())
 			collee = true
-			
+		if collee :
+			in_held_block = false
+			var block = get_parent().dijkstra(self)
+			for voisin in block :
+				voisin.in_held_block = false
 		held = false
 
 func _on_animation_changed():
