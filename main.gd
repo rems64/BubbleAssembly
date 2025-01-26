@@ -43,8 +43,8 @@ func dijkstra(bulleDep : Node) :
 	var i = 0
 	while voisins_visites.size() < liste_voisins.size() :
 		i += 1
-		print("_______")
-		print("tour : ", i)
+		#print("_______")
+		#print("tour : ", i)
 		#print("liste voisins : ", liste_voisins)
 		#print("liste_visites : ", voisins_visites)
 		var voisin = liste_voisins[voisins_visites.size()]

@@ -12,7 +12,20 @@ func _process(delta: float) -> void:
 	for bubble in bubbles:
 		if (bubble.held || bubble.in_held_block):
 			continue
-		var correction = Vector2(0, to_local(bubble.position).y).rotated(rotation)
-		var force = (traction - 0.01*correction).normalized() * 100 * delta
-		#bubble.move_and_collide(force)
-		bubble.position += force
+		if get_instance_id() in bubble.conveyors_data:
+			if bubble.conveyors_data[get_instance_id()] >= Engine.get_frames_drawn():
+				continue
+		var others = bubble.get_parent().dijkstra(bubble)
+		others.push_back(bubble)
+		var mid = Vector2.ZERO
+		for o in others:
+			mid += o.global_position
+		mid /= others.size()
+		
+		var correction = Vector2(0, to_local(mid).y).rotated(rotation)
+		for o in others:
+			if (get_instance_id() in bubble.conveyors_data) && (bubble.conveyors_data[get_instance_id()] < Engine.get_frames_drawn()):
+				var force = (traction - 0.01*correction).normalized() * 100 * delta
+				#bubble.move_and_collide(force)
+				o.position += force
+			o.conveyors_data[get_instance_id()] = Engine.get_frames_drawn()
