@@ -8,9 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://bnxpox1r4ypfm" path="res://bubulle.tscn" id="2_gc5vy"]
 [ext_resource type="Texture2D" uid="uid://bakfbds3klh1t" path="res://illus/level_objectifs/lv1.png" id="3_k8yba"]
 [ext_resource type="Texture2D" uid="uid://i11malh6w03d" path="res://illus/level_objectifs/lv2.png" id="4_c7apq"]
-[ext_resource type="PackedScene" path="res://conveyor.tscn" id="4_ir3kw"]
+[ext_resource type="PackedScene" uid="uid://cvj0pylkkabra" path="res://conveyor.tscn" id="4_ir3kw"]
 [ext_resource type="PackedScene" uid="uid://brc6qlway2mx5" path="res://color_changer.tscn" id="5_si668"]
-[ext_resource type="PackedScene" path="res://exit.tscn" id="6_ppdk1"]
+[ext_resource type="PackedScene" uid="uid://cd4m8jq5cocs2" path="res://exit.tscn" id="6_ppdk1"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_j02ya"]
 animations = [{
@@ -85,8 +85,8 @@ size = Vector2(20, 10)
 script = ExtResource("1_xra8f")
 
 [node name="objectif" type="Node2D" parent="."]
-script = ExtResource("2_3rmrg")
 position = Vector2(413, 166)
+script = ExtResource("2_3rmrg")
 
 [node name="ColorRect" type="ColorRect" parent="objectif"]
 offset_left = 12.0
