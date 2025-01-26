@@ -1,10 +1,41 @@
-[gd_scene load_steps=16 format=4 uid="uid://cd8ornr32tkhw"]
+[gd_scene load_steps=21 format=4 uid="uid://cd8ornr32tkhw"]
 
 [ext_resource type="TileSet" uid="uid://b8b7c7jw0qg2m" path="res://factory_belts.tres" id="1_0rjcl"]
 [ext_resource type="Script" path="res://main.gd" id="1_xra8f"]
+[ext_resource type="Texture2D" uid="uid://12n0d04wd02l" path="res://illus/level_objectifs/lv0.png" id="2_3wd65"]
+[ext_resource type="FontFile" uid="uid://dbmqagvqypr2v" path="res://Pixle_Font.ttf" id="2_3x6ar"]
 [ext_resource type="PackedScene" uid="uid://bnxpox1r4ypfm" path="res://bubulle.tscn" id="2_gc5vy"]
-[ext_resource type="PackedScene" uid="uid://cvj0pylkkabra" path="res://conveyor.tscn" id="4_ir3kw"]
+[ext_resource type="Texture2D" uid="uid://bakfbds3klh1t" path="res://illus/level_objectifs/lv1.png" id="3_k8yba"]
+[ext_resource type="Texture2D" uid="uid://i11malh6w03d" path="res://illus/level_objectifs/lv2.png" id="4_c7apq"]
+[ext_resource type="PackedScene" path="res://conveyor.tscn" id="4_ir3kw"]
 [ext_resource type="PackedScene" uid="uid://brc6qlway2mx5" path="res://color_changer.tscn" id="5_si668"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j02ya"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_3wd65")
+}],
+"loop": false,
+"name": &"lv0",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_k8yba")
+}],
+"loop": false,
+"name": &"lv1",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_c7apq")
+}],
+"loop": false,
+"name": &"lv2",
+"speed": 0.0
+}]
 
 [sub_resource type="Curve2D" id="Curve2D_mwdgh"]
 _data = {
@@ -51,6 +82,30 @@ size = Vector2(20, 10)
 [node name="SceneRoot" type="Node2D"]
 script = ExtResource("1_xra8f")
 
+[node name="objectif" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="objectif"]
+offset_left = 31.0
+offset_top = -56.0
+offset_right = 71.0
+offset_bottom = -16.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="objectif"]
+position = Vector2(44, -35)
+sprite_frames = SubResource("SpriteFrames_j02ya")
+animation = &"lv2"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 7.0
+offset_top = 214.0
+offset_right = 397.0
+offset_bottom = 297.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("2_3x6ar")
+theme_override_font_sizes/font_size = 40
+text = "Left click : seize bubble
+Right click : pop bubble"
+
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAPAAYAAQAAABkAAAAOAAYAAQAAAAEAAAANAAYAAQAAAAEAAAAMAAYAAQAAAAEAAAALAAYAAQAAAAEAAAAKAAYAAQAAAAEAAAAJAAYAAQAAABYAAAAIAAYAAQAAABUAAAAHAAYAAQAAABQAAAAGAAYAAQAAAAEAAAABAAEAAQAAAAEAAAACAAEAAQAAAAEAAAADAAEAAQAAAAEAAAAEAAEAAQAAAAEAAAAFAAEAAQAAAAEAAAAGAAEAAQAAAAEAAAAHAAEAAQAAABQAAAAIAAEAAQAAABUAAAAJAAEAAQAAABYAAAAKAAEAAQAAAAEAAAAPAAEAAQAAABcAAAALAAEAAQAAAAEAAAAMAAEAAQAAAAEAAAANAAEAAQAAAAEAAAAOAAEAAQAAAAEAAAAFAAYAAQAAAAgAAAAFAAUAAQAAAAQAAAAFAAQAAQAAAAYAAAAEAAQAAQAAABYAAAADAAQAAQAAABUAAAACAAQAAQAAABQAAAABAAQAAQAAAAgAAAABAAMAAQAAAAkAAAACAAMAAQAAAAIAAAADAAMAAQAAAAIAAAAEAAMAAQAAAAIAAAAFAAMAAQAAAAIAAAAGAAMAAQAAAAIAAAAHAAMAAQAAAAIAAAAIAAMAAQAAAAIAAAA=")
 tile_set = ExtResource("1_0rjcl")
@@ -61,7 +116,7 @@ color = Color(1, 0, 0, 1)
 
 [node name="ColorChanger2" parent="." instance=ExtResource("5_si668")]
 position = Vector2(112, 144)
-color = Color(0, 1, 0, 1)
+color = Color(0.982887, 0.811106, 0, 1)
 
 [node name="ColorChanger3" parent="." instance=ExtResource("5_si668")]
 position = Vector2(272, 208)
