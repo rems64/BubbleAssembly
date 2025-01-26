@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://cd8ornr32tkhw"]
+[gd_scene load_steps=22 format=4 uid="uid://cd8ornr32tkhw"]
 
 [ext_resource type="TileSet" uid="uid://b8b7c7jw0qg2m" path="res://factory_belts.tres" id="1_0rjcl"]
 [ext_resource type="Script" path="res://main.gd" id="1_xra8f"]
@@ -7,8 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://bnxpox1r4ypfm" path="res://bubulle.tscn" id="2_gc5vy"]
 [ext_resource type="Texture2D" uid="uid://bakfbds3klh1t" path="res://illus/level_objectifs/lv1.png" id="3_k8yba"]
 [ext_resource type="Texture2D" uid="uid://i11malh6w03d" path="res://illus/level_objectifs/lv2.png" id="4_c7apq"]
-[ext_resource type="PackedScene" path="res://conveyor.tscn" id="4_ir3kw"]
+[ext_resource type="PackedScene" uid="uid://cvj0pylkkabra" path="res://conveyor.tscn" id="4_ir3kw"]
 [ext_resource type="PackedScene" uid="uid://brc6qlway2mx5" path="res://color_changer.tscn" id="5_si668"]
+[ext_resource type="PackedScene" uid="uid://cd4m8jq5cocs2" path="res://exit.tscn" id="6_ppdk1"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_j02ya"]
 animations = [{
@@ -192,10 +193,10 @@ position = Vector2(160, 142)
 shape = SubResource("RectangleShape2D_agss4")
 
 [node name="Area2D" parent="." instance=ExtResource("6_ppdk1")]
-position = Vector2(508, 45)
+position = Vector2(507, 46)
 
 [node name="Area2D2" parent="." instance=ExtResource("6_ppdk1")]
-position = Vector2(508, 205)
+position = Vector2(507, 204)
 is_exit = true
 
 [editable path="Conveyor"]
