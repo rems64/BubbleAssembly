@@ -144,6 +144,12 @@ texture_region_size = Vector2i(32, 32)
 0:23/animation_frame_2/duration = 0.15
 0:23/animation_frame_3/duration = 0.15
 0:23/0 = 0
+0:25/animation_columns = 4
+0:25/animation_frame_0/duration = 0.15
+0:25/animation_frame_1/duration = 0.15
+0:25/animation_frame_2/duration = 0.15
+0:25/animation_frame_3/duration = 0.15
+0:25/0 = 0
 
 [resource]
 tile_size = Vector2i(32, 32)

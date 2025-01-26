@@ -14,4 +14,5 @@ func _process(delta: float) -> void:
 			continue
 		var correction = Vector2(0, to_local(bubble.position).y).rotated(rotation)
 		var force = (traction - 0.01*correction).normalized() * 100 * delta
-		bubble.move_and_collide(force)
+		#bubble.move_and_collide(force)
+		bubble.position += force
