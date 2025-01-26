@@ -7,9 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://bnxpox1r4ypfm" path="res://bubulle.tscn" id="2_gc5vy"]
 [ext_resource type="Texture2D" uid="uid://bakfbds3klh1t" path="res://illus/level_objectifs/lv1.png" id="3_k8yba"]
 [ext_resource type="Texture2D" uid="uid://i11malh6w03d" path="res://illus/level_objectifs/lv2.png" id="4_c7apq"]
-[ext_resource type="PackedScene" uid="uid://cvj0pylkkabra" path="res://conveyor.tscn" id="4_ir3kw"]
+[ext_resource type="PackedScene" path="res://conveyor.tscn" id="4_ir3kw"]
 [ext_resource type="PackedScene" uid="uid://brc6qlway2mx5" path="res://color_changer.tscn" id="5_si668"]
-[ext_resource type="PackedScene" uid="uid://cd4m8jq5cocs2" path="res://exit.tscn" id="6_ppdk1"]
+[ext_resource type="PackedScene" path="res://exit.tscn" id="6_ppdk1"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_j02ya"]
 animations = [{
@@ -84,17 +84,29 @@ size = Vector2(20, 10)
 script = ExtResource("1_xra8f")
 
 [node name="objectif" type="Node2D" parent="."]
+position = Vector2(413, 166)
 
 [node name="ColorRect" type="ColorRect" parent="objectif"]
-offset_left = 31.0
-offset_top = -56.0
-offset_right = 71.0
-offset_bottom = -16.0
+offset_left = 12.0
+offset_top = -76.0
+offset_right = 52.0
+offset_bottom = -36.0
+scale = Vector2(1.67908, 1.70093)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="objectif"]
-position = Vector2(44, -35)
+position = Vector2(43, -34)
 sprite_frames = SubResource("SpriteFrames_j02ya")
-animation = &"lv2"
+animation = &"lv0"
+
+[node name="Label" type="Label" parent="objectif"]
+offset_left = 21.0
+offset_top = -95.0
+offset_right = 114.0
+offset_bottom = -55.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("2_3x6ar")
+theme_override_font_sizes/font_size = 40
+text = "Order"
 
 [node name="Label" type="Label" parent="."]
 offset_left = 7.0
