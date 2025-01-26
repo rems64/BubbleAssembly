@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://cd8ornr32tkhw"]
+[gd_scene load_steps=25 format=4 uid="uid://cd8ornr32tkhw"]
 
 [ext_resource type="TileSet" uid="uid://b8b7c7jw0qg2m" path="res://factory_belts.tres" id="1_0rjcl"]
 [ext_resource type="Script" path="res://main.gd" id="1_xra8f"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://brc6qlway2mx5" path="res://color_changer.tscn" id="5_si668"]
 [ext_resource type="PackedScene" uid="uid://cd4m8jq5cocs2" path="res://exit.tscn" id="6_ppdk1"]
 [ext_resource type="Script" path="res://spawn_point.gd" id="12_smqhh"]
+[ext_resource type="AudioStream" uid="uid://bhp68y3uurpxq" path="res://bit-bit-loop-127680.mp3" id="13_0o5o2"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_j02ya"]
 animations = [{
@@ -218,6 +219,10 @@ is_exit = true
 [node name="SpawnPoint" type="Node2D" parent="."]
 position = Vector2(-26, 43)
 script = ExtResource("12_smqhh")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_0o5o2")
+autoplay = true
 
 [connection signal="spawn_bubble" from="SpawnPoint" to="." method="_on_spawn_point_spawn_bubble"]
 
