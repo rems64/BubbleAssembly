@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ctl03nd4omgmf"]
+[gd_scene load_steps=12 format=3 uid="uid://ctl03nd4omgmf"]
 
 [ext_resource type="FontFile" uid="uid://dbmqagvqypr2v" path="res://Pixle_Font.ttf" id="1_e2hye"]
 [ext_resource type="Script" path="res://start.gd" id="1_j7lqy"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://dl7yg3sxy4oui" path="res://illus/pixel_bulle.png" id="3_oa8ue"]
 [ext_resource type="Script" path="res://bienvenue.gd" id="3_yio2o"]
 [ext_resource type="AudioStream" uid="uid://dxppx0onh8046" path="res://musique_intro.mp3" id="5_2ev23"]
-[ext_resource type="PackedScene" uid="uid://cd8ornr32tkhw" path="res://level01.tscn" id="8_6emyb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_38uy5"]
 content_margin_left = 1.0
@@ -76,8 +75,6 @@ point_count = 18
 
 [node name="bienvenue" type="Node2D"]
 script = ExtResource("1_jasbq")
-
-[node name="SceneRoot" parent="." instance=ExtResource("8_6emyb")]
 
 [node name="accueil" type="Node2D" parent="."]
 script = ExtResource("1_j7lqy")
