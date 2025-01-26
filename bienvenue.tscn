@@ -77,6 +77,8 @@ point_count = 18
 [node name="bienvenue" type="Node2D"]
 script = ExtResource("1_jasbq")
 
+[node name="SceneRoot" parent="." instance=ExtResource("8_6emyb")]
+
 [node name="accueil" type="Node2D" parent="."]
 script = ExtResource("1_j7lqy")
 
@@ -126,8 +128,6 @@ script = ExtResource("3_yio2o")
 [node name="s" type="Sprite2D" parent="accueil/Path2D/PathFollow2D"]
 position = Vector2(6, 2)
 texture = ExtResource("3_oa8ue")
-
-[node name="SceneRoot" parent="." instance=ExtResource("8_6emyb")]
 
 [connection signal="niveau1" from="accueil" to="." method="_on_start_cliqued"]
 [connection signal="pressed" from="accueil/Button" to="accueil" method="_on_button_pressed"]
