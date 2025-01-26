@@ -18,7 +18,10 @@ signal clicked
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	global_position.x = get_parent().global_position.x + 2*len_bulle
+	global_position.y = get_parent().global_position.y + 3*len_bulle
+	#modulate = Color(191, 222, 255)
+	#modulate = Color(1, 1, 1, 255)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -45,7 +48,7 @@ func _physics_process(delta):
 	
 	#//recalcule des voisins
 	var collision = get_colliding_bodies()
-	if collision != null :
+	if collision != [] :
 		if held :
 			global_position = round(get_global_mouse_position())
 		for bulle in collision :
@@ -68,29 +71,40 @@ func drop(impulse=Vector2.ZERO) :
 		#freeze = false
 		apply_central_impulse(impulse)
 		var collision = get_colliding_bodies()
-		#var collision = move_and_collide(Vector2(0, 0))
-		if collision != null :
+		if collision != [] :
 			print(collision)
 			 #handle the rightful placement
+			var me_x = global_position.x
+			var me_y = global_position.y
+			var min_dist = +INF
+			var proche_bulle
+			
+			#cherche la bulle voisine la plus proche
 			for bulle in collision :
 				#var bulle = collider
 				var bulle_x = bulle.global_position.x
 				var bulle_y = bulle.global_position.y
-				var me_x = global_position.x
-				var me_y = global_position.y
+				var dist = sqrt((bulle_x - me_x)**2 + (bulle_y - me_y)**2)
 				
-				var diff_x = me_x - bulle_x
-				var diff_y = me_y - bulle_y
-				if abs(diff_x) > abs(diff_y) : #si la bulle est plus à ma gauche/droite qu'en haut/bas :
-					global_position.y = bulle.global_position.y
-					if diff_x < 0 : #la bulle est à ma droite
-						global_position.x = bulle.global_position.x - 2*len_bulle-5
-					else : global_position.x = bulle.global_position.x + 2*len_bulle+5
-				else :
-					global_position.x = bulle.global_position.x
-					if diff_y < 0 : #la bulle est en-dessous de moi
-						global_position.y = bulle.global_position.y - 2*len_bulle-5
-					else : global_position.y = bulle.global_position.y + 2*len_bulle+5
+				if dist < min_dist :
+					min_dist = dist
+					proche_bulle = bulle
+				
+			#place l'objet en fonction de la bulle voisine la plus proche
+			var bulle_x = proche_bulle.global_position.x
+			var bulle_y = proche_bulle.global_position.y
+			var diff_x = me_x - bulle_x
+			var diff_y = me_y - bulle_y
+			if abs(diff_x) > abs(diff_y) : #si la bulle est plus à ma gauche/droite qu'en haut/bas :
+				global_position.y = bulle_y
+				if diff_x < 0 : #la bulle est à ma droite
+					global_position.x = bulle_x - 2*len_bulle-5
+				else : global_position.x = bulle_x + 2*len_bulle+5
+			else :
+				global_position.x = bulle_x
+				if diff_y < 0 : #la bulle est en-dessous de moi
+					global_position.y = bulle_y - 2*len_bulle-5
+				else : global_position.y = bulle_y + 2*len_bulle+5
 			
 		held = false
 
