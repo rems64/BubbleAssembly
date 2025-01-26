@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://ctl03nd4omgmf"]
+[gd_scene load_steps=9 format=3 uid="uid://ctl03nd4omgmf"]
 
 [ext_resource type="FontFile" uid="uid://dbmqagvqypr2v" path="res://Pixle_Font.ttf" id="1_e2hye"]
 [ext_resource type="PackedScene" uid="uid://idwlm7l7ny2e" path="res://node_2d.tscn" id="2_0084a"]
+[ext_resource type="Texture2D" uid="uid://dl7yg3sxy4oui" path="res://illus/pixel_bulle.png" id="3_oa8ue"]
+[ext_resource type="Script" path="res://bienvenue.gd" id="3_yio2o"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_38uy5"]
 content_margin_left = 1.0
@@ -64,7 +66,7 @@ Button/styles/pressed = SubResource("StyleBoxFlat_38uy5")
 
 [sub_resource type="Curve2D" id="Curve2D_3if7o"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 18, 0, 0, 0, 0, 412, 18, 0, 0, 0, 0, 426, 4, 0, 0, 0, 0, 426, -160, 0, 0, 0, 0, 436, -172, 0, 0, 0, 0, 538, -172, 0, 0, 0, 0, 550, -164, 0, 0, 0, 0, 556, -120, 0, 0, 0, 0, 576, -108, 0, 0, 0, 0, 802, -108, 0, 0, 0, 0, 810, -94, 0, 0, 0, 0, 808, 8, 0, 0, 0, 0, 796, 20, 0, 0, 0, 0, 694, 18, 0, 0, 0, 0, 682, 30, 0, 0, 0, 0, 686, 74, 0, 0, 0, 0, 706, 84, 0, 0, 0, 0, 1024, 84)
+"points": PackedVector2Array(0, 0, 0, 0, -2, 16, 0, 0, 0, 0, 404, 16, 0, 0, 0, 0, 424, 2, 0, 0, 0, 0, 424, -160, 0, 0, 0, 0, 440, -176, 0, 0, 0, 0, 538, -176, 0, 0, 0, 0, 552, -164, 0, 0, 0, 0, 556, -120, 0, 0, 0, 0, 578, -112, 0, 0, 0, 0, 796, -112, 0, 0, 0, 0, 810, -94, 0, 0, 0, 0, 810, 6, 0, 0, 0, 0, 792, 16, 0, 0, 0, 0, 694, 16, 0, 0, 0, 0, 682, 30, 0, 0, 0, 0, 684, 72, 0, 0, 0, 0, 712, 82, 0, 0, 0, 0, 1022, 80)
 }
 point_count = 18
 
@@ -100,11 +102,15 @@ text = "START"
 position = Vector2(0, 152)
 
 [node name="Path2D" type="Path2D" parent="."]
-position = Vector2(-5, 187)
+position = Vector2(-5, 184)
 scale = Vector2(0.5, 0.5)
 curve = SubResource("Curve2D_3if7o")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2(0, 18)
+position = Vector2(-2, 16)
+rotates = false
+script = ExtResource("3_yio2o")
 
-[node name="s" type="Sprite2D" parent="."]
+[node name="s" type="Sprite2D" parent="Path2D/PathFollow2D"]
+position = Vector2(6, 2)
+texture = ExtResource("3_oa8ue")
