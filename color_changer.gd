@@ -1,8 +1,8 @@
 extends Node2D
 
 @export var color: Color
-@export var process_duration: float = 3.
-@export var process_duration_random: float = 2.
+@export var process_duration: float = 2.
+@export var process_duration_random: float = 1.
 
 @onready var area_in: Area2D = $"Area In"
 @onready var area_out: Area2D = $"Area Out"
@@ -25,14 +25,14 @@ func _process(delta: float) -> void:
 				continue
 			bubble[0].reparent(get_tree().get_current_scene())
 			var bub = bubble[0].get_child(0);
-			if (bub.modulate == Color.BLACK):
+			if (bub.modulate == Color.DIM_GRAY):
 				pass
 			elif (bub.modulate == Color.WHITE):
 				bub.modulate = color
 			else:
 				bub.modulate = Color(min(bub.modulate.r+color.r, 1), min(bub.modulate.g+color.g, 1), min(bub.modulate.b+color.b, 1))
 				if (bub.modulate == Color.WHITE):
-					bub.modulate = Color.BLACK
+					bub.modulate = Color.DIM_GRAY #Color.BLACK
 			bubble[0].show();
 			bubble[0].currently_processed = false
 			bubble[0].collision_layer = bubble[3]

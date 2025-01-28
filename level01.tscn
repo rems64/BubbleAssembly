@@ -15,6 +15,33 @@
 [ext_resource type="Script" path="res://spawn_point.gd" id="12_smqhh"]
 [ext_resource type="AudioStream" uid="uid://bhp68y3uurpxq" path="res://bit-bit-loop-127680.mp3" id="13_0o5o2"]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_j02ya"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_3wd65")
+}],
+"loop": false,
+"name": &"lv0",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_k8yba")
+}],
+"loop": false,
+"name": &"lv1",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_c7apq")
+}],
+"loop": false,
+"name": &"lv2",
+"speed": 0.0
+}]
+
 [sub_resource type="Curve2D" id="Curve2D_mwdgh"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 285, 1, 0, 0, 0, 0, 286, 32, 0, 0, 0, 0, 1, 33, 0, 0, 0, 0, 0, 0)
@@ -57,33 +84,6 @@ size = Vector2(68, 10)
 resource_local_to_scene = true
 size = Vector2(20, 10)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_j02ya"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_3wd65")
-}],
-"loop": false,
-"name": &"lv0",
-"speed": 0.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_k8yba")
-}],
-"loop": false,
-"name": &"lv1",
-"speed": 0.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_c7apq")
-}],
-"loop": false,
-"name": &"lv2",
-"speed": 0.0
-}]
-
 [node name="SceneRoot" type="Node2D"]
 script = ExtResource("1_xra8f")
 
@@ -97,6 +97,32 @@ theme_override_fonts/font = ExtResource("2_0j4c4")
 theme_override_font_sizes/font_size = 40
 text = "Left click : seize bubble
 Right click : pop bubble"
+
+[node name="objectif" type="Node2D" parent="."]
+position = Vector2(413, 166)
+script = ExtResource("2_3rmrg")
+
+[node name="ColorRect" type="ColorRect" parent="objectif"]
+offset_left = 12.0
+offset_top = -76.0
+offset_right = 52.0
+offset_bottom = -36.0
+scale = Vector2(1.67908, 1.70093)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="objectif"]
+position = Vector2(43, -34)
+sprite_frames = SubResource("SpriteFrames_j02ya")
+animation = &"lv0"
+
+[node name="Label" type="Label" parent="objectif"]
+offset_left = 21.0
+offset_top = -95.0
+offset_right = 114.0
+offset_bottom = -55.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("2_3x6ar")
+theme_override_font_sizes/font_size = 40
+text = "Order"
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(0, 1)
@@ -195,32 +221,6 @@ is_exit = true
 [node name="SpawnPoint" type="Node2D" parent="."]
 position = Vector2(-26, 43)
 script = ExtResource("12_smqhh")
-
-[node name="objectif" type="Node2D" parent="."]
-position = Vector2(413, 166)
-script = ExtResource("2_3rmrg")
-
-[node name="ColorRect" type="ColorRect" parent="objectif"]
-offset_left = 12.0
-offset_top = -76.0
-offset_right = 52.0
-offset_bottom = -36.0
-scale = Vector2(1.67908, 1.70093)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="objectif"]
-position = Vector2(43, -34)
-sprite_frames = SubResource("SpriteFrames_j02ya")
-animation = &"lv0"
-
-[node name="Label" type="Label" parent="objectif"]
-offset_left = 21.0
-offset_top = -95.0
-offset_right = 114.0
-offset_bottom = -55.0
-scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("2_3x6ar")
-theme_override_font_sizes/font_size = 40
-text = "Order"
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_0o5o2")

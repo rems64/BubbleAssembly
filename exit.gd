@@ -15,12 +15,15 @@ func _process(delta: float) -> void:
 func check_0(body, blocks) -> bool:
 	print(body.get_child(0).modulate)
 	print(Color.YELLOW)
-	return body.get_child(0).modulate == Color.YELLOW
+	if blocks.size() == 0 :
+		return body.get_child(0).modulate == Color.YELLOW
+	return false
 
 func check_1(body, blocks) -> bool:
 	print("check_1")
 	if blocks.size() != 1: return false
 	var body2 = blocks[0]
+	if body.global_position.y == body2.global_position.y : return false #vérifie que les blocks ne soient pas sur 1 ligne
 	var haut = body if (body.global_position.y < body2.global_position.y) else body2
 	var bas = body2 if (body.global_position.y < body2.global_position.y) else body
 	print(haut.get_child(0).modulate)
