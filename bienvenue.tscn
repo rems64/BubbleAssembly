@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ctl03nd4omgmf"]
+[gd_scene load_steps=13 format=3 uid="uid://ctl03nd4omgmf"]
 
 [ext_resource type="FontFile" uid="uid://dbmqagvqypr2v" path="res://Pixle_Font.ttf" id="1_e2hye"]
 [ext_resource type="Script" path="res://start.gd" id="1_j7lqy"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dl7yg3sxy4oui" path="res://illus/pixel_bulle.png" id="3_oa8ue"]
 [ext_resource type="Script" path="res://bienvenue.gd" id="3_yio2o"]
 [ext_resource type="AudioStream" uid="uid://dxppx0onh8046" path="res://musique_intro.mp3" id="5_2ev23"]
+[ext_resource type="FontFile" uid="uid://dw1oa587pisml" path="res://PixelBook-Regular.ttf" id="5_2072f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_38uy5"]
 content_margin_left = 1.0
@@ -60,7 +61,7 @@ default_font = ExtResource("1_e2hye")
 default_font_size = 20
 Button/colors/font_outline_color = Color(0.0486, 0.08862, 0.09, 1)
 Button/colors/icon_normal_color = Color(0.0958448, 0.217461, 0.221105, 1)
-Button/fonts/font = ExtResource("1_e2hye")
+Button/fonts/font = ExtResource("5_2072f")
 Button/icons/icon = null
 Button/styles/focus = null
 Button/styles/hover = SubResource("StyleBoxFlat_38uy5")
@@ -88,14 +89,14 @@ position = Vector2(0, 152)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="accueil"]
 texture_filter = 1
-offset_left = 83.0
-offset_top = 18.0
-offset_right = 1207.0
-offset_bottom = 177.0
+offset_left = 116.0
+offset_right = 1001.0
+offset_bottom = 159.0
 scale = Vector2(0.276267, 0.324088)
 pivot_offset = Vector2(38, 36)
+size_flags_horizontal = 4
 mouse_force_pass_scroll_events = false
-theme_override_fonts/normal_font = ExtResource("1_e2hye")
+theme_override_fonts/normal_font = ExtResource("5_2072f")
 theme_override_font_sizes/normal_font_size = 160
 bbcode_enabled = true
 text = "Bubble Factory
@@ -108,9 +109,19 @@ drag_and_drop_selection_enabled = false
 offset_left = 250.0
 offset_top = 160.0
 offset_right = 309.0
-offset_bottom = 182.0
+offset_bottom = 183.0
 scale = Vector2(1.23982, 1.20429)
 theme = SubResource("Theme_3krrx")
+theme_override_font_sizes/font_size = 21
+
+[node name="Label" type="Label" parent="accueil/Button"]
+layout_mode = 0
+offset_left = 1.61314
+offset_top = 0.830365
+offset_right = 184.613
+offset_bottom = 68.8304
+scale = Vector2(0.3, 0.3)
+theme_override_font_sizes/font_size = 67
 text = "START"
 
 [node name="Path2D" type="Path2D" parent="accueil"]
