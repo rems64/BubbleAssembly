@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bnxpox1r4ypfm" path="res://bubulle.tscn" id="2_gc5vy"]
 [ext_resource type="Texture2D" uid="uid://bakfbds3klh1t" path="res://illus/level_objectifs/lv1.png" id="3_k8yba"]
 [ext_resource type="Texture2D" uid="uid://i11malh6w03d" path="res://illus/level_objectifs/lv2.png" id="4_c7apq"]
-[ext_resource type="PackedScene" path="res://conveyor.tscn" id="4_ir3kw"]
+[ext_resource type="PackedScene" uid="uid://cvj0pylkkabra" path="res://conveyor.tscn" id="4_ir3kw"]
 [ext_resource type="PackedScene" uid="uid://brc6qlway2mx5" path="res://color_changer.tscn" id="5_si668"]
 [ext_resource type="PackedScene" uid="uid://bp5p0og3uv3i2" path="res://exit.tscn" id="6_ppdk1"]
 [ext_resource type="Texture2D" uid="uid://bbrpmyk36x5hq" path="res://illus/level_objectifs/lv3.png" id="7_5vbqx"]
@@ -157,16 +157,19 @@ tile_map_data = PackedByteArray("AAAPAAYAAQAAABkAAAAOAAYAAQAAAAEAAAANAAYAAQAAAAE
 tile_set = ExtResource("1_0rjcl")
 
 [node name="ColorChanger" parent="." instance=ExtResource("5_si668")]
-position = Vector2(272, 48)
+position = Vector2(272, 49)
 color = Color(1, 0, 0, 1)
+process_duration_random = 0.0
 
 [node name="ColorChanger2" parent="." instance=ExtResource("5_si668")]
-position = Vector2(112, 144)
+position = Vector2(112, 145)
 color = Color(0, 1, 0, 1)
+process_duration_random = 0.0
 
 [node name="ColorChanger3" parent="." instance=ExtResource("5_si668")]
-position = Vector2(272, 208)
+position = Vector2(272, 209)
 color = Color(0, 0, 1, 1)
+process_duration_random = 0.0
 
 [node name="Path2D" type="Path2D" parent="."]
 visible = false
@@ -253,6 +256,7 @@ script = ExtResource("12_smqhh")
 stream = ExtResource("13_0o5o2")
 autoplay = true
 
+[connection signal="spawn_bubble" from="ColorChanger" to="." method="_on_spawn_point_spawn_bubble"]
 [connection signal="spawn_bubble" from="SpawnPoint" to="." method="_on_spawn_point_spawn_bubble"]
 
 [editable path="Conveyor"]
